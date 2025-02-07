@@ -29,7 +29,7 @@ def digit_sum(n: int) -> int:
 
 def classify_number(n: int) -> list[str]:
     properties = ["even" if n % 2 == 0 else "odd"]
-    if n == sum(int(digit) ** len(str(n)) for digit in str(n)):
+    if n == sum(int(digit) ** len(str(n)) for digit in str(abs(n))):
         properties.append("armstrong")
     return properties
 
@@ -48,7 +48,6 @@ async def classify_number_api(number: str):
         num = int(number)
     except ValueError:
         raise HTTPException(status_code=400, detail={"number": number, "error": True})
-
     result = {
         "number": num,
         "is_prime": is_prime(num),
